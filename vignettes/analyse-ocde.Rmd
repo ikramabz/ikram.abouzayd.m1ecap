@@ -1,0 +1,98 @@
+---
+title: "Analyse du jeu de donnees OCDE"
+author: "Ikram Abouzayd"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Analyse du jeu de donnees OCDE}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Description
+
+Cette vignette presente un exemple simple d'utilisation du package ikram.abouzayd.m1ecap applique au jeu de donnees ocde.
+
+Le jeu de donnees contient 38 pays membres ou partenaires de l'OCDE pour l'annee 2017, avec une variable qualitative (continent) et plusieurs variables quantitatives exploitables.
+
+## Chargement du package et des donnees
+
+```{r}
+library(ikram.abouzayd.m1ecap)
+data("ocde")
+```
+
+
+## Filtrage selon une variable qualitative
+
+On peut filtrer les observations selon une modalite d'une variable qualitative.
+Ici, on conserve uniquement les pays d'Europe.
+
+```{r}
+europe <- filtrer_modalite(ocde, "continent", "Europe")
+head(europe)
+```
+
+
+
+## Calcul groupe d'une variable quantitative
+
+On calcule maintenant la moyenne de l'esperance de vie par continent.
+
+
+```{r}
+res_moyenne <- calcul_stat_par_groupe(
+  data = ocde,
+  variable_quanti = "esperance_vie_ans",
+  variable_quali = "continent",
+  stat = "mean"
+)
+
+res_moyenne
+```
+
+On peut aussi calculer une autre statistique, par exemple la mediane du score de satisfaction dans la vie par continent.
+
+
+```{r}
+res_mediane <- calcul_stat_par_groupe(
+  data = ocde,
+  variable_quanti = "satisfaction_vie_score",
+  variable_quali = "continent",
+  stat = "median"
+)
+
+res_mediane
+```
+
+
+
+## Representation graphique
+
+Enfin, on peut produire un graphique a partir du calcul groupe precedent.
+
+
+```{r fig.width=8, fig.height=3}
+graphique_stat_par_groupe(
+  data = ocde,
+  variable_quanti = "esperance_vie_ans",
+  variable_quali = "continent",
+  stat = "mean"
+)
+```
+
+
+## Conclusion
+
+Cette vignette montre que le package permet :
+
+- de filtrer un jeu de donnees selon une variable qualitative ;
+- de calculer une statistique sur une variable quantitative par groupe ;
+- de representer graphiquement ce resultat avec ggplot2.
