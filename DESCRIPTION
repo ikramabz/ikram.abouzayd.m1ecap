@@ -1,0 +1,13 @@
+Package: ikram.abouzayd.m1ecap
+Title: Analyse d'un jeu de donnees OECD
+Version: 0.0.0.9000
+Authors@R: 
+    person("Ikram", "Abouzayd", email = "ikram.abouzayd@etu.univ-nantes.fr", role = c("aut", "cre"))
+Description: Fonctions d'analyse, de filtrage et de visualisation d'un jeu de donnees OECD.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+LazyData: true
+RoxygenNote: 7.3.3
+Depends: 
+    R (>= 3.5)
